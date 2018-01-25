@@ -1,5 +1,5 @@
 #pragma once
-#include <list>
+#include <vector>
 #include "Entity.h"
 
 using namespace std;
@@ -7,14 +7,12 @@ using namespace std;
 class World
 {
 public:
-	World() {}
-	~World() {}
+	World() = default;
 
 	void GameLoop();
-	int GetEntityCount() { return entities_.size(); }
 
 private:
-	list<Entity*> entities_;
+	vector<Entity*> entities_;
 	void Update();
 };
 

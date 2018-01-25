@@ -14,10 +14,12 @@ public:
 	Entity(InputComponent* input,
 		PhysicsComponent* physics,
 		GraphicsComponent* graphics)
-		: input_(input),
-		physics_(physics),
-		graphics_(graphics)
-	{}
+		: velocity(0), x(0), y(0), 
+		  input_(input),
+		  physics_(physics),
+		  graphics_(graphics)
+	{
+	}
 
 	void Update(World& world)
 	{

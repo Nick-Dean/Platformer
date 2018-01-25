@@ -14,8 +14,8 @@ void World::GameLoop()
 
 	while (true)
 	{
-		auto current = clock::now();
-		auto elapsed = current - previous;
+		auto const current = clock::now();
+		auto const elapsed = current - previous;
 		previous = current;
 		lag += chrono::duration_cast<chrono::microseconds>(elapsed);
 
