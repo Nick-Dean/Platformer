@@ -1,6 +1,7 @@
 #pragma once
-#include "World.h"
-#include "Entity.h"
+
+class Entity;
+class World;
 
 class PhysicsComponent
 {

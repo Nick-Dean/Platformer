@@ -7,8 +7,8 @@ using namespace std;
 class World
 {
 public:
-	World();
-	~World();
+	World() {}
+	~World() {}
 
 	void GameLoop();
 	int GetEntityCount() { return entities_.size(); }

@@ -35,6 +35,6 @@ void World::Update()
 {
 	for (auto entity : entities_)
 	{
-		entity->Update();
+		entity->Update(*this);
 	}
 }

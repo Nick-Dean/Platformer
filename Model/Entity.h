@@ -3,6 +3,8 @@
 #include "PhysicsComponent.h"
 #include "GraphicsComponent.h"
 
+class World;
+
 class Entity
 {
 public:
