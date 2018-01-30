@@ -67,12 +67,12 @@ void Level::LoadMap(string mapName, Graphics & graphics)
 		while (pTileset)
 		{
 			int firstGid;
-			const char* source = pTileset->FirstChildElement("image")->Attribute("source");
+			const char* source = pTileset->Attribute("source");
 
-			stringStream.clear();
-			stringStream << "Content/Tilesets" << source;
+			stringStream.str(""); 
+			stringStream << source;
 
-			pTileset->QueryIntAttribute("firstGgid", &firstGid);
+			pTileset->QueryIntAttribute("firstgid", &firstGid);
 			SDL_Texture* texture = SDL_CreateTextureFromSurface(graphics.GetRenderer(), graphics.LoadImage(stringStream.str()));
 
 			tileSets_.push_back(Tileset(texture, firstGid));
@@ -112,7 +112,7 @@ void Level::LoadMap(string mapName, Graphics & graphics)
 								}
 							}
 
-							int gid = pTileset->IntAttribute("gid");
+							int gid = pTile->IntAttribute("gid");
 							Tileset tileset;
 
 							for (auto i = 0; i < tileSets_.size(); ++i)
@@ -159,15 +159,15 @@ void Level::LoadMap(string mapName, Graphics & graphics)
 							tileList_.push_back(tile);
 
 							tileCounter++;
-							pData = pTileset->NextSiblingElement("tile");
+							pTile = pTile->NextSiblingElement("tile");
 						}
 					}
 						
-					pData = pTileset->NextSiblingElement("data");
+					pData = pData->NextSiblingElement("data");
 				}
 			}
 
-			pLayer = pTileset->NextSiblingElement("layer");
+			pLayer = pLayer->NextSiblingElement("layer");
 		}
 	}
 }

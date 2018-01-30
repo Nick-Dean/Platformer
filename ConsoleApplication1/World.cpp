@@ -22,13 +22,6 @@ World::World()
 	b2World_->SetAllowSleeping(true);
 	b2World_->SetContinuousPhysics(true);
 
-	b2BodyDef groundBodyDef;
-	groundBodyDef.position.Set(0.0f, 200.0f);
-	b2Body* groundBody = b2World_->CreateBody(&groundBodyDef);
-	b2PolygonShape groundBox;
-	groundBox.SetAsBox(1000.0f, 10.0f);
-	groundBody->CreateFixture(&groundBox, 0.0f);
-
 	GameLoop();
 }
 
@@ -55,7 +48,7 @@ void World::GameLoop()
 	auto player = new Entity(qInput, qPhysics, qSprite);
 	entities_.push_back(player);
 
-	level_ = new Level("untitled", Vector2(100, 100), graphics);
+	level_ = new Level("Map1", Vector2(100, 100), graphics);
 
 	while (true)
 	{
