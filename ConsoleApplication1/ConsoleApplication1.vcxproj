@@ -109,7 +109,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>sfml-main-d.lib;sfml-graphics-s-d.lib;sfml-window-s-d.lib;sfml-system-s-d.lib;opengl32.lib;freetype.lib;jpeg.lib;winmm.lib;gdi32.lib;Box2D.lib;GLEW.lib;GLFW.lib;IMGUI.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Box2D.lib;SDL2.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -148,17 +148,48 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AnimatedSprite.h" />
+    <ClInclude Include="B2PhysicsComponent.h" />
+    <ClInclude Include="Entity.h" />
+    <ClInclude Include="Globals.h" />
+    <ClInclude Include="graphics.h" />
+    <ClInclude Include="GraphicsComponent.h" />
+    <ClInclude Include="Input.h" />
+    <ClInclude Include="InputComponent.h" />
+    <ClInclude Include="Level.h" />
+    <ClInclude Include="PhysicsComponent.h" />
+    <ClInclude Include="PlayerInputComponent.h" />
+    <ClInclude Include="QuoteGraphics.h" />
+    <ClInclude Include="QuotePhysics.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Sprite.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Tile.h" />
+    <ClInclude Include="tinyxml2.h" />
+    <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AnimatedSprite.cpp" />
+    <ClCompile Include="B2PhysicsComponent.cpp" />
     <ClCompile Include="ConsoleApplication1.cpp" />
+    <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Graphics.cpp" />
+    <ClCompile Include="Input.cpp" />
+    <ClCompile Include="Level.cpp" />
+    <ClCompile Include="PlayerInputComponent.cpp" />
+    <ClCompile Include="QuoteGraphics.cpp" />
+    <ClCompile Include="QuotePhysics.cpp" />
+    <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="tinyxml2.cpp" />
+    <ClCompile Include="World.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
