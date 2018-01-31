@@ -11,7 +11,7 @@ Entity::Entity()
 }
 
 Entity::Entity(InputComponent * input, PhysicsComponent * physics, GraphicsComponent * graphics)
-	: velocity(0.0f, 0.0f), x(0), y(0),
+	: velocity(0.0f, 0.0f), x(100), y(0),
 	input_(input),
 	physics_(physics),
 	graphics_(graphics)

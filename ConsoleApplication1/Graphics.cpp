@@ -5,7 +5,7 @@
 
 Graphics::Graphics()
 {
-	SDL_CreateWindowAndRenderer(640, 480, 0, &window_, &renderer_);
+	SDL_CreateWindowAndRenderer(1440, 900, 0, &window_, &renderer_);
 	SDL_SetWindowTitle(window_, "Platformer");
 }
 

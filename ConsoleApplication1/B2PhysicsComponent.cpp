@@ -65,7 +65,7 @@ void B2PhysicsComponent::CreateFixture(b2Shape * shape)
 	b2FixtureDef fixtureDef;
 	fixtureDef.shape = shape;
 	fixtureDef.density = 1.0f;
-	fixtureDef.friction = 0.7f;
+	fixtureDef.friction = 0.1f;
 	fixtureDef.restitution = 0.0f;
 	fixtureDef.filter.categoryBits = FilterCategory::SOLID_OBJECT;
 	fixtureDef.filter.maskBits = 0xffff;

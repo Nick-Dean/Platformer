@@ -10,8 +10,8 @@ QuotePhysics::QuotePhysics()
 
 QuotePhysics::QuotePhysics(b2World & world) : B2PhysicsComponent(world)
 {
-	AddRectangularFixtureToBody(1.0f, 0.5f);
-	AddCircularFixtureToBody(1.0f, 0, -0.5f);
+	AddRectangularFixtureToBody(16.0f, 16.0f);
+	AddCircularFixtureToBody(16.0f, 0, 8.0f);
 	b2Body_->SetBullet(true);
 }
 

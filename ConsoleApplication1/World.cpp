@@ -10,6 +10,7 @@
 #include "QuotePhysics.h"
 #include "PlayerInputComponent.h"
 #include "Level.h"
+#include "DebugDraw.h"
 
 using namespace std;
 
@@ -21,6 +22,13 @@ World::World()
 	b2World_ = new b2World(b2Vec2(0.0f, 9.81f));
 	b2World_->SetAllowSleeping(true);
 	b2World_->SetContinuousPhysics(true);
+
+	b2BodyDef groundBodyDef;
+	groundBodyDef.position.Set(0.0f, 100.0f);
+	b2Body* groundBody = b2World_->CreateBody(&groundBodyDef);
+	b2PolygonShape groundBox;
+	groundBox.SetAsBox(5000.0f, 16.0f);
+	groundBody->CreateFixture(&groundBox, 0.0f);
 
 	GameLoop();
 }
@@ -37,6 +45,10 @@ void World::GameLoop()
 
 	Graphics graphics;
 	Input input;
+
+	DebugDraw drawer(&graphics);
+	b2World_->SetDebugDraw(&drawer);
+	drawer.SetFlags(b2Draw::e_shapeBit);
 
 	auto previous = SDL_GetTicks();
 	Uint32 lag = 0;
@@ -119,14 +131,17 @@ void World::Update(Input& input)
 
 void World::Render(chrono::milliseconds interpolation, Graphics &graphics)
 {
+	SDL_SetRenderDrawColor(graphics.GetRenderer(), 255, 255, 255, 255);
 	graphics.Clear();
 
-	level_->Draw(graphics);
+	b2World_->DrawDebugData();
+	
+	/*level_->Draw(graphics);
 	for (auto entity : entities_)
 	{
 		entity->Draw(graphics);
-	}
-
+	}*/
+	
 	graphics.Flip();
 }
 
