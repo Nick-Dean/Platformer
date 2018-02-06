@@ -1,11 +1,12 @@
 #include "stdafx.h"
 #include "graphics.h"
+#include "Globals.h"
 #include <SDL2/SDL.h>
 #include <SDL2_image/SDL_image.h>
 
 Graphics::Graphics()
 {
-	SDL_CreateWindowAndRenderer(1440, 900, 0, &window_, &renderer_);
+	SDL_CreateWindowAndRenderer(Globals::SCREEN_WIDTH, Globals::SCREEN_HEIGHT, 0, &window_, &renderer_);
 	SDL_SetWindowTitle(window_, "Platformer");
 }
 

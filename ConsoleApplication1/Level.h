@@ -5,6 +5,7 @@
 #include <vector>
 
 class Graphics;
+class Camera;
 struct SDL_Texture;
 struct SDL_Rect;
 struct Tileset;
@@ -20,7 +21,9 @@ public:
 	~Level();
 
 	void Update();
-	void Draw(Graphics &graphics);
+	void Draw(Graphics &graphics, Camera &camera);
+
+	Vector2 GetSize() { return size_; }
 
 private:
 	string mapName_;

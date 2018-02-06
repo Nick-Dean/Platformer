@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Tile.h"
 #include "graphics.h"
+#include "Camera.h"
 #include <SDL2/SDL.h>
 
 Tile::Tile()
@@ -22,9 +23,9 @@ void Tile::Update()
 {
 }
 
-void Tile::Draw(Graphics & graphics)
+void Tile::Draw(Graphics & graphics, Camera &camera)
 {
-	SDL_Rect destRect = { position_.x, position_.y, size_.x * Globals::SPRITE_SCALE, size_.y * Globals::SPRITE_SCALE };
+	SDL_Rect destRect = { position_.x - camera.GetRectangle().x , position_.y - camera.GetRectangle().y, size_.x * Globals::SPRITE_SCALE, size_.y * Globals::SPRITE_SCALE };
 	SDL_Rect sourceRect = { tilesetPosition_.x, tilesetPosition_.y, size_.x, size_.y };
 
 	graphics.BlitSurface(tileset_, &sourceRect, &destRect);

@@ -3,6 +3,7 @@
 
 struct SDL_Texture;
 class Graphics;
+class Camera;
 
 class Tile
 {
@@ -12,7 +13,9 @@ public:
 	~Tile();
 
 	void Update();
-	void Draw(Graphics &graphics);
+	void Draw(Graphics &graphics, Camera &camera);
+
+	Vector2 GetPosition() { return position_; }
 
 private:
 	SDL_Texture * tileset_;

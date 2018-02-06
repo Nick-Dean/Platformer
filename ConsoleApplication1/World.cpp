@@ -11,6 +11,7 @@
 #include "PlayerInputComponent.h"
 #include "Level.h"
 #include "DebugDraw.h"
+#include "Camera.h"
 
 using namespace std;
 
@@ -24,10 +25,10 @@ World::World()
 	b2World_->SetContinuousPhysics(true);
 
 	b2BodyDef groundBodyDef;
-	groundBodyDef.position.Set(0.0f, 100.0f);
+	groundBodyDef.position.Set(0.0f, 10.0f);
 	b2Body* groundBody = b2World_->CreateBody(&groundBodyDef);
 	b2PolygonShape groundBox;
-	groundBox.SetAsBox(5000.0f, 16.0f);
+	groundBox.SetAsBox(100.0f, 1.0f);
 	groundBody->CreateFixture(&groundBox, 0.0f);
 
 	GameLoop();
@@ -59,8 +60,11 @@ void World::GameLoop()
 
 	auto player = new Entity(qInput, qPhysics, qSprite);
 	entities_.push_back(player);
+	player_ = player;
 
 	level_ = new Level("Map1", Vector2(100, 100), graphics);
+	camera_ = new Camera();
+	camera_->SetLevelSize(level_->GetSize());
 
 	while (true)
 	{
@@ -77,7 +81,7 @@ void World::GameLoop()
 			lag -= TIMESTEP;
 		}
 		
-		Render(chrono::milliseconds(lag / TIMESTEP), graphics);
+		Render(chrono::milliseconds(lag / TIMESTEP), graphics, *camera_);
 	}
 }
 
@@ -119,6 +123,7 @@ void World::ProcessInput(Input& input)
 
 void World::Update(Input& input)
 {
+	camera_->Update(*player_);
 	level_->Update();
 
 	for (auto entity : entities_)
@@ -129,18 +134,18 @@ void World::Update(Input& input)
 	b2World_->Step(float32(TIMESTEP), 8, 3);
 }
 
-void World::Render(chrono::milliseconds interpolation, Graphics &graphics)
+void World::Render(chrono::milliseconds interpolation, Graphics &graphics, Camera &camera)
 {
-	SDL_SetRenderDrawColor(graphics.GetRenderer(), 255, 255, 255, 255);
+	//SDL_SetRenderDrawColor(graphics.GetRenderer(), 255, 255, 255, 255);
 	graphics.Clear();
 
-	b2World_->DrawDebugData();
+	//b2World_->DrawDebugData();
 	
-	/*level_->Draw(graphics);
+	level_->Draw(graphics, camera);
 	for (auto entity : entities_)
 	{
 		entity->Draw(graphics);
-	}*/
+	}
 	
 	graphics.Flip();
 }

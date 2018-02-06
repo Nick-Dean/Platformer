@@ -150,6 +150,7 @@
   <ItemGroup>
     <ClInclude Include="AnimatedSprite.h" />
     <ClInclude Include="B2PhysicsComponent.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="DebugDraw.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Globals.h" />
@@ -162,6 +163,7 @@
     <ClInclude Include="PlayerInputComponent.h" />
     <ClInclude Include="QuoteGraphics.h" />
     <ClInclude Include="QuotePhysics.h" />
+    <ClInclude Include="RectangleCollision.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="stdafx.h" />
@@ -173,6 +175,7 @@
   <ItemGroup>
     <ClCompile Include="AnimatedSprite.cpp" />
     <ClCompile Include="B2PhysicsComponent.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="ConsoleApplication1.cpp" />
     <ClCompile Include="DebugDraw.cpp" />
     <ClCompile Include="Entity.cpp" />
@@ -182,6 +185,7 @@
     <ClCompile Include="PlayerInputComponent.cpp" />
     <ClCompile Include="QuoteGraphics.cpp" />
     <ClCompile Include="QuotePhysics.cpp" />
+    <ClCompile Include="RectangleCollision.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

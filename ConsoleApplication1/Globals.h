@@ -3,6 +3,8 @@
 namespace Globals
 {
 	const int SPRITE_SCALE = 2;
+	const int SCREEN_WIDTH = 640;
+	const int SCREEN_HEIGHT = 512;
 }
 
 enum Direction

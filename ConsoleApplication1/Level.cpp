@@ -4,9 +4,11 @@
 #include <SDL2/SDL.h>
 #include "Globals.h"
 #include "tinyxml2.h"
+#include "RectangleCollision.h"
 #include <sstream>
 #include <algorithm>
 #include <cmath>
+#include "Camera.h"
 
 using namespace tinyxml2;
 
@@ -29,12 +31,20 @@ void Level::Update()
 {
 }
 
-void Level::Draw(Graphics & graphics)
+void Level::Draw(Graphics & graphics, Camera &camera)
 {
+	int c = 0;
 	for (auto i = 0; i < tileList_.size(); ++i)
 	{
-		tileList_[i].Draw(graphics);
+		auto position = tileList_[i].GetPosition();
+
+		if (AreColliding(SDL_Rect{ position.x, position.y, tileSize_.x, tileSize_.y }, camera.GetRectangle()))
+		{
+			c++;
+			tileList_[i].Draw(graphics, camera);
+		}
 	}
+	c = 0;
 }
 
 void Level::LoadMap(string mapName, Graphics & graphics)
