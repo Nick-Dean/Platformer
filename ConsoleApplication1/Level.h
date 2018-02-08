@@ -6,6 +6,7 @@
 
 class Graphics;
 class Camera;
+class b2World;
 struct SDL_Texture;
 struct SDL_Rect;
 struct Tileset;
@@ -17,7 +18,7 @@ class Level
 {
 public:
 	Level();
-	Level(string mapName, Vector2 spawnPoint, Graphics &graphics);
+	Level(string mapName, Vector2 spawnPoint, Graphics &graphics, b2World &world);
 	~Level();
 
 	void Update();
@@ -38,7 +39,7 @@ private:
 	vector<Tileset> tileSets_;
 
 
-	void LoadMap(string mapName, Graphics &graphics);
+	void LoadMap(string mapName, Graphics &graphics, b2World &world);
 };
 
 struct Tileset

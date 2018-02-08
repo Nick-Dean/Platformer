@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "DebugDraw.h"
 #include "graphics.h"
+#include "Globals.h"
 #include <SDL2\SDL.h>
 #include <SDL2_image\SDL_image.h>
 
@@ -12,10 +13,10 @@ void DebugDraw::DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b2C
 {
 	SDL_SetRenderDrawColor(graphics_->GetRenderer(), 255, 0, 0, 255);
 	SDL_Rect poly;
-	poly.x = vertices[0].x;
-	poly.y = vertices[0].y;
-	poly.w = (vertices[0].x - vertices[1].x) > 0 ? vertices[0].x - vertices[1].x : vertices[1].x - vertices[0].x;
-	poly.h = (vertices[0].y - vertices[1].y) > 0 ? vertices[0].y - vertices[1].y : vertices[1].y - vertices[0].y;
+	poly.x = vertices[0].x * Globals::PIXELS_PER_METER;
+	poly.y = vertices[0].y * Globals::PIXELS_PER_METER;
+	poly.w = (vertices[0].x * Globals::PIXELS_PER_METER - vertices[1].x * Globals::PIXELS_PER_METER) > 0 ? vertices[0].x * Globals::PIXELS_PER_METER - vertices[1].x * Globals::PIXELS_PER_METER : vertices[1].x * Globals::PIXELS_PER_METER - vertices[0].x * Globals::PIXELS_PER_METER;
+	poly.h = (vertices[0].y * Globals::PIXELS_PER_METER - vertices[1].y * Globals::PIXELS_PER_METER) > 0 ? vertices[0].y * Globals::PIXELS_PER_METER - vertices[1].y * Globals::PIXELS_PER_METER : vertices[1].y * Globals::PIXELS_PER_METER - vertices[0].y * Globals::PIXELS_PER_METER;
 	SDL_RenderDrawRect(graphics_->GetRenderer(), &poly);
 }
 
@@ -23,10 +24,10 @@ void DebugDraw::DrawSolidPolygon(const b2Vec2* vertices, int32 vertexCount, cons
 {
 	SDL_SetRenderDrawColor(graphics_->GetRenderer(), 255, 0, 0, 255);
 	SDL_Rect poly;
-	poly.x = vertices[0].x;
-	poly.y = vertices[0].y;
-	poly.w = (vertices[0].x - vertices[1].x) > 0 ? vertices[0].x - vertices[1].x : vertices[1].x - vertices[0].x;
-	poly.h = (vertices[1].y - vertices[2].y) > 0 ? vertices[1].y - vertices[2].y : vertices[2].y - vertices[1].y;
+	poly.x = vertices[0].x * Globals::PIXELS_PER_METER;
+	poly.y = vertices[0].y * Globals::PIXELS_PER_METER;
+	poly.w = (vertices[0].x * Globals::PIXELS_PER_METER - vertices[1].x * Globals::PIXELS_PER_METER) > 0 ? vertices[0].x * Globals::PIXELS_PER_METER - vertices[1].x * Globals::PIXELS_PER_METER : vertices[1].x * Globals::PIXELS_PER_METER - vertices[0].x * Globals::PIXELS_PER_METER;
+	poly.h = (vertices[1].y * Globals::PIXELS_PER_METER - vertices[2].y * Globals::PIXELS_PER_METER) > 0 ? vertices[1].y * Globals::PIXELS_PER_METER - vertices[2].y * Globals::PIXELS_PER_METER : vertices[2].y * Globals::PIXELS_PER_METER - vertices[1].y * Globals::PIXELS_PER_METER;
 	SDL_RenderDrawRect(graphics_->GetRenderer(), &poly);
 }
 

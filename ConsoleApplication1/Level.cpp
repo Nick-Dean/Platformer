@@ -5,10 +5,12 @@
 #include "Globals.h"
 #include "tinyxml2.h"
 #include "RectangleCollision.h"
+#include <string>
 #include <sstream>
 #include <algorithm>
 #include <cmath>
 #include "Camera.h"
+#include <Box2D\Box2D.h>
 
 using namespace tinyxml2;
 
@@ -17,9 +19,9 @@ Level::Level()
 {
 }
 
-Level::Level(string mapName, Vector2 spawnPoint, Graphics & graphics) : mapName_(mapName), spawnPoint_(spawnPoint), size_(Vector2(0, 0))
+Level::Level(string mapName, Vector2 spawnPoint, Graphics & graphics, b2World &world) : mapName_(mapName), spawnPoint_(spawnPoint), size_(Vector2(0, 0))
 {
-	LoadMap(mapName, graphics);
+	LoadMap(mapName, graphics, world);
 }
 
 
@@ -47,7 +49,7 @@ void Level::Draw(Graphics & graphics, Camera &camera)
 	c = 0;
 }
 
-void Level::LoadMap(string mapName, Graphics & graphics)
+void Level::LoadMap(string mapName, Graphics & graphics, b2World &world)
 {
 	// Parse .tmx file
 	XMLDocument doc;
@@ -178,6 +180,76 @@ void Level::LoadMap(string mapName, Graphics & graphics)
 			}
 
 			pLayer = pLayer->NextSiblingElement("layer");
+		}
+	}
+
+	XMLElement* pObjectGroup = mapNode->FirstChildElement("objectgroup");
+	auto numObj = 0;
+	if (pObjectGroup != nullptr)
+	{
+		b2PolygonShape polyShape;
+		
+		b2FixtureDef fixtureDef;
+		fixtureDef.shape = &polyShape;
+		fixtureDef.density = 1;
+
+		b2BodyDef bodyDef;
+		bodyDef.type = b2_staticBody;
+		bodyDef.position.Set(0, 0);
+		b2Body* staticBody = world.CreateBody(&bodyDef);
+
+		while (pObjectGroup)
+		{
+			XMLElement* pObject = pObjectGroup->FirstChildElement("object");
+			if (pObject != nullptr)
+			{
+				float objHeight, objWidth, xPos, yPos;
+
+				while (pObject)
+				{
+					xPos = pObject->FloatAttribute("x") / Globals::PIXELS_PER_METER;
+					yPos = pObject->FloatAttribute("y") / Globals::PIXELS_PER_METER;
+
+					XMLElement* pPoly = pObject->FirstChildElement("polygon");
+					if (pPoly != nullptr)
+					{
+						while (pPoly)
+						{
+							vector<b2Vec2> pointList;
+							stringstream points(pPoly->Attribute("points"));
+
+							while (points.good())
+							{
+								string point;
+								getline(points, point, ' ');
+
+								auto commaIndex = point.find(',');
+								auto x = xPos + (std::stof(point.substr(0, commaIndex)) / Globals::PIXELS_PER_METER);
+								auto y = yPos + (std::stof(point.substr(commaIndex + 1, point.size() - 1)) / Globals::PIXELS_PER_METER);
+								pointList.push_back(b2Vec2(x, y));
+							}
+
+							polyShape.Set(&pointList[0], pointList.size());
+
+							pPoly = pPoly->NextSiblingElement("polygon");
+						}
+					}
+					else
+					{
+						objHeight = pObject->FloatAttribute("height") / Globals::PIXELS_PER_METER;
+						objWidth = pObject->FloatAttribute("width") / Globals::PIXELS_PER_METER;
+						b2Vec2 center = b2Vec2(xPos + objWidth / 2, yPos + objHeight / 2);
+
+						polyShape.SetAsBox(objWidth / 2, objHeight / 2, center, 0);
+						numObj++;
+					}
+
+					staticBody->CreateFixture(&fixtureDef);
+					pObject = pObject->NextSiblingElement("object");
+				}
+			}
+
+			pObjectGroup = pObjectGroup->NextSiblingElement("objectgroup");
 		}
 	}
 }

@@ -22,8 +22,8 @@ QuotePhysics::~QuotePhysics()
 
 void QuotePhysics::Update(Entity & entity, World & world)
 {
-	b2Body_->ApplyLinearImpulseToCenter(b2Vec2(entity.velocity.x, entity.velocity.y), true);
+	b2Body_->ApplyForceToCenter(b2Vec2(entity.velocity.x, entity.velocity.y), true);
 
-	entity.x = b2Body_->GetPosition().x * 16;
-	entity.y = b2Body_->GetPosition().y * 16;
+	entity.x = b2Body_->GetPosition().x * Globals::PIXELS_PER_METER;
+	entity.y = b2Body_->GetPosition().y * Globals::PIXELS_PER_METER;
 }

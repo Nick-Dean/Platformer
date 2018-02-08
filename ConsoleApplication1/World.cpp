@@ -24,13 +24,6 @@ World::World()
 	b2World_->SetAllowSleeping(true);
 	b2World_->SetContinuousPhysics(true);
 
-	b2BodyDef groundBodyDef;
-	groundBodyDef.position.Set(0.0f, 10.0f);
-	b2Body* groundBody = b2World_->CreateBody(&groundBodyDef);
-	b2PolygonShape groundBox;
-	groundBox.SetAsBox(100.0f, 1.0f);
-	groundBody->CreateFixture(&groundBox, 0.0f);
-
 	GameLoop();
 }
 
@@ -62,7 +55,7 @@ void World::GameLoop()
 	entities_.push_back(player);
 	player_ = player;
 
-	level_ = new Level("Map1", Vector2(100, 100), graphics);
+	level_ = new Level("Map1", Vector2(100, 100), graphics, *b2World_);
 	camera_ = new Camera();
 	camera_->SetLevelSize(level_->GetSize());
 
@@ -136,16 +129,17 @@ void World::Update(Input& input)
 
 void World::Render(chrono::milliseconds interpolation, Graphics &graphics, Camera &camera)
 {
-	//SDL_SetRenderDrawColor(graphics.GetRenderer(), 255, 255, 255, 255);
+	SDL_SetRenderDrawColor(graphics.GetRenderer(), 255, 255, 255, 255);
 	graphics.Clear();
 
-	//b2World_->DrawDebugData();
 	
 	level_->Draw(graphics, camera);
 	for (auto entity : entities_)
 	{
-		entity->Draw(graphics);
+		entity->Draw(graphics, camera);
 	}
+
+	b2World_->DrawDebugData();
 	
 	graphics.Flip();
 }

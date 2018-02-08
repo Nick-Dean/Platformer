@@ -36,7 +36,7 @@ void B2PhysicsComponent::SetUserData(Entity & entity)
 
 void B2PhysicsComponent::SetPosition(Entity & entity)
 {
-	b2Body_->SetTransform(b2Vec2(entity.x, entity.y), 0.0f);
+	b2Body_->SetTransform(b2Vec2(entity.x / Globals::PIXELS_PER_METER, entity.y / Globals::PIXELS_PER_METER), 0.0f);
 }
 
 void B2PhysicsComponent::Update(Entity & entity, World & world)

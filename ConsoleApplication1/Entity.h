@@ -4,6 +4,7 @@
 class World;
 class Input;
 class Graphics;
+class Camera;
 class InputComponent;
 class PhysicsComponent;
 class GraphicsComponent;
@@ -21,7 +22,7 @@ public:
 
 	void Update(Input& input, World& world);
 
-	void Draw(Graphics &graphics);
+	void Draw(Graphics &graphics, Camera &camera);
 
 private:
 	InputComponent* input_;

@@ -5,13 +5,14 @@
 #include "InputComponent.h"
 #include "PhysicsComponent.h"
 #include "GraphicsComponent.h"
+#include "Camera.h"
 
 Entity::Entity()
 {
 }
 
 Entity::Entity(InputComponent * input, PhysicsComponent * physics, GraphicsComponent * graphics)
-	: velocity(0.0f, 0.0f), x(0), y(0),
+	: velocity(0.0f, 0.0f), x(100), y(100),
 	input_(input),
 	physics_(physics),
 	graphics_(graphics)
@@ -27,7 +28,7 @@ void Entity::Update(Input& input, World & world)
 	graphics_->Update(*this);
 }
 
-void Entity::Draw(Graphics & graphics)
+void Entity::Draw(Graphics & graphics, Camera &camera)
 {
-	graphics_->Draw(graphics, x, y);
+	graphics_->Draw(graphics, x - camera.GetRectangle().x, y - camera.GetRectangle().y);
 }
