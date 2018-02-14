@@ -68,7 +68,7 @@ void AnimatedSprite::Update(Entity & entity)
 {
 	Sprite::Update(entity);
 
-	timeElapsed_ += 16;
+	timeElapsed_ += Globals::MS_PER_FRAME;
 	
 	if (timeElapsed_ >= timeToUpdate_)
 	{

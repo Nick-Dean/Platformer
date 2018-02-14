@@ -19,14 +19,14 @@ void PlayerInputComponent::Update(Input & input, Entity & entity)
 
 	if (input.IsKeyHeld(SDL_SCANCODE_A))
 	{
-		entity.velocity.x = -3.6f;
+		entity.velocity.x = -2.6f;
 	}
 	if (input.IsKeyHeld(SDL_SCANCODE_D))
 	{
-		entity.velocity.x = 3.6f;
+		entity.velocity.x = 2.6f;
 	}
 	if (input.IsKeyHeld(SDL_SCANCODE_SPACE))
 	{
-		entity.velocity.y = -50.0f;
+		entity.velocity.y = -10.0f;
 	}
 }

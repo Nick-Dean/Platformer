@@ -15,12 +15,10 @@
 
 using namespace std;
 
-const int TIMESTEP = 16;
-
 World::World()
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
-	b2World_ = new b2World(b2Vec2(0.0f, 9.81f));
+	b2World_ = new b2World(b2Vec2(0.0f, Globals::GAVITY_CONSTANT));
 	b2World_->SetAllowSleeping(true);
 	b2World_->SetContinuousPhysics(true);
 
@@ -68,13 +66,13 @@ void World::GameLoop()
 
 		ProcessInput(input);
 
-		while (lag >= TIMESTEP)
+		while (lag >= Globals::MS_PER_FRAME)
 		{
 			Update(input);
-			lag -= TIMESTEP;
+			lag -= Globals::MS_PER_FRAME;
 		}
 		
-		Render(chrono::milliseconds(lag / TIMESTEP), graphics, *camera_);
+		Render(chrono::milliseconds(lag / Globals::MS_PER_FRAME), graphics, *camera_);
 	}
 }
 
@@ -124,7 +122,7 @@ void World::Update(Input& input)
 		entity->Update(input, *this);
 	}
 
-	b2World_->Step(float32(TIMESTEP), 8, 3);
+	b2World_->Step(0.016f, 8, 3);
 }
 
 void World::Render(chrono::milliseconds interpolation, Graphics &graphics, Camera &camera)

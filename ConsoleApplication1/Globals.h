@@ -2,6 +2,9 @@
 
 namespace Globals
 {
+	const float GAVITY_CONSTANT = 9.81f;
+	const int MS_PER_FRAME = 16;
+	const int TILE_SIZE = 16;
 	const int SPRITE_SCALE = 2;
 	const int SCREEN_WIDTH = 640;
 	const int SCREEN_HEIGHT = 512;

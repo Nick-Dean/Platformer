@@ -15,14 +15,14 @@ Camera::Camera()
 
 void Camera::SetLevelSize(Vector2 &levelSize)
 {
-	levelWidth_ = levelSize.x * 16 * 2;
-	levelHeight_ = levelSize.y * 16 * 2;
+	levelWidth_ = levelSize.x * Globals::TILE_SIZE * Globals::SPRITE_SCALE;
+	levelHeight_ = levelSize.y * Globals::TILE_SIZE * Globals::SPRITE_SCALE;
 }
 
 void Camera::Update(Entity& player)
 {
-	rectangle_.x = player.x + 8 - Globals::SCREEN_WIDTH / 2;
-	rectangle_.y = player.y + 8 - Globals::SCREEN_HEIGHT / 2;;
+	rectangle_.x = player.x + (Globals::TILE_SIZE  / 2) - (Globals::SCREEN_WIDTH / 2);
+	rectangle_.y = player.y + (Globals::TILE_SIZE / 2) - Globals::SCREEN_HEIGHT / 2;;
 
 	if (rectangle_.x < 0)
 	{

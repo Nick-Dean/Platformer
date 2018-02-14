@@ -8,7 +8,7 @@ QuoteGraphics::QuoteGraphics()
 }
 
 QuoteGraphics::QuoteGraphics(Graphics & graphics) :
-	AnimatedSprite(graphics, "Content/MyChar.png", 0, 0, 16, 16, 100)
+	AnimatedSprite(graphics, "Content/MyChar.png", 0, 0, Globals::TILE_SIZE, Globals::TILE_SIZE, 100)
 {
 	graphics.LoadImage("Content/MyChar.png");
 	SetupAnimations();
@@ -47,8 +47,8 @@ void QuoteGraphics::AnimationDone(string currentAnimation)
 
 void QuoteGraphics::SetupAnimations()
 {
-	AddAnimation(1, 0, 0, "IdleLeft", 16, 16, Vector2(0, 0));
-	AddAnimation(1, 0, 16, "IdleRight", 16, 16, Vector2(0, 0));
-	AddAnimation(3, 0, 0, "RunLeft", 16, 16, Vector2(0, 0));
-	AddAnimation(3, 0, 16, "RunRight", 16, 16, Vector2(0, 0));
+	AddAnimation(1, 0, 0, "IdleLeft", Globals::TILE_SIZE, Globals::TILE_SIZE, Vector2(0, 0));
+	AddAnimation(1, 0, Globals::TILE_SIZE, "IdleRight", Globals::TILE_SIZE, Globals::TILE_SIZE, Vector2(0, 0));
+	AddAnimation(3, 0, 0, "RunLeft", Globals::TILE_SIZE, Globals::TILE_SIZE, Vector2(0, 0));
+	AddAnimation(3, 0, Globals::TILE_SIZE, "RunRight", Globals::TILE_SIZE, Globals::TILE_SIZE, Vector2(0, 0));
 }
